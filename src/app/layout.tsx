@@ -5,6 +5,8 @@ import "./globals.css"
 
 import { ThemeProvider } from "@/providers/theme-provider"
 
+import { TooltipProvider } from "@/components/ui/tooltip"
+
 const font = DM_Sans({
   subsets: ["latin"],
 })
@@ -31,7 +33,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <TooltipProvider>{children}</TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -15,7 +15,6 @@ import { Separator } from "@/components/ui/separator"
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { ThemeSwitcher } from "@/components/theme-switcher"
@@ -29,36 +28,34 @@ export function Sidebar() {
         <Link className="flex font-bold" href="/">
           Robotnik.
         </Link>
-        <TooltipProvider>
-          {MENU_OPTIONS.map((option) => (
-            <ul key={option.name}>
-              <Tooltip delayDuration={0}>
-                <TooltipTrigger>
-                  <li>
-                    <Link
-                      href={option.href}
-                      className={cn(
-                        "group size-8 flex items-center justify-center scale-[1.5] rounded-lg p-[3px] cursor-pointer",
-                        {
-                          "dark:bg-[#2F006B] bg-[#EEE0FF]":
-                            pathName === option.href,
-                        },
-                      )}
-                    >
-                      <option.Component selected={pathName === option.href} />
-                    </Link>
-                  </li>
-                </TooltipTrigger>
-                <TooltipContent
-                  side="right"
-                  className="bg-black/10 backdrop-blur-xl"
-                >
-                  <p>{option.name}</p>
-                </TooltipContent>
-              </Tooltip>
-            </ul>
-          ))}
-        </TooltipProvider>
+        {MENU_OPTIONS.map((option) => (
+          <ul key={option.name}>
+            <Tooltip delayDuration={0}>
+              <TooltipTrigger>
+                <li>
+                  <Link
+                    href={option.href}
+                    className={cn(
+                      "group size-8 flex items-center justify-center scale-[1.5] rounded-lg p-[3px] cursor-pointer",
+                      {
+                        "dark:bg-[#2F006B] bg-[#EEE0FF]":
+                          pathName === option.href,
+                      },
+                    )}
+                  >
+                    <option.Component selected={pathName === option.href} />
+                  </Link>
+                </li>
+              </TooltipTrigger>
+              <TooltipContent
+                side="right"
+                className="bg-black/10 backdrop-blur-xl"
+              >
+                <p>{option.name}</p>
+              </TooltipContent>
+            </Tooltip>
+          </ul>
+        ))}
         <Separator />
         <div className="flex flex-col items-center gap-9 dark:bg-[#353346]/30 py-4 px-2 rounded-full h-56 overflow-scroll border">
           <div className="relative dark:bg-[#353346]/70 p-2 rounded-full dark:border-t-2 border dark:border-t-[#353346]">
