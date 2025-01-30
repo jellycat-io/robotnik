@@ -1,23 +1,17 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { DM_Sans } from "next/font/google"
 
 import "./globals.css"
 
 import { ThemeProvider } from "@/providers/theme-provider"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-})
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const font = DM_Sans({
   subsets: ["latin"],
 })
 
 export const metadata: Metadata = {
-  title: "Next template",
-  description: "Let's start building",
+  title: "Robotnik",
+  description: "Let Robotnik do your work for you",
 }
 
 export default function RootLayout({
@@ -28,11 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${font.className} antialiased`}
+        suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
