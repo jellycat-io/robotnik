@@ -8,6 +8,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 
+import { UserButton } from "./user-button"
+
 export function InfoBar() {
   return (
     <div className="flex justify-end items-center gap-6 p-4 w-full dark:bg-black">
@@ -15,12 +17,13 @@ export function InfoBar() {
         <SearchIcon />
         <Input
           placeholder="Quick search"
-          className="border-none bg-transparent"
+          className="border-none bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
         />
       </span>
       <div className="flex items-center gap-4">
         <InfoBarButton icon={HeadphonesIcon} title="Contact Support" />
         <InfoBarButton icon={BookIcon} title="Documentation" />
+        <UserButton />
       </div>
     </div>
   )
@@ -34,7 +37,7 @@ interface InfoBarButtonProps {
 function InfoBarButton({ icon: Icon, title }: InfoBarButtonProps) {
   return (
     <Tooltip delayDuration={0}>
-      <TooltipTrigger>
+      <TooltipTrigger asChild>
         <Button variant="ghost" size="icon">
           <Icon />
         </Button>

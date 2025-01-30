@@ -24,7 +24,7 @@ export default function Home() {
           <h2 className="text-5xl font-semibold">
             Let Robotnik handle your work for you.
           </h2>
-          <button className="p-[3px] relative mt-8">
+          <button className="relative p-[3px] mt-8">
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
             <div className="text-xl font-semibold px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
               Get started for free

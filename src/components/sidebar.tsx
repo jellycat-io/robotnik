@@ -31,7 +31,7 @@ export function Sidebar() {
         {MENU_OPTIONS.map((option) => (
           <ul key={option.name}>
             <Tooltip delayDuration={0}>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <li>
                   <Link
                     href={option.href}
