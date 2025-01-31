@@ -23,8 +23,8 @@ model User {
   DiscordWebhook        DiscordWebhook[]
   Notion                Notion[]
   Slack                 Slack[]
-  connections           Connections[]
-  workflows             Workflows[]
+  connections           Connection[]
+  workflows             Workflow[]
 }
 
 model LocalGoogleCredential {
@@ -50,7 +50,7 @@ model DiscordWebhook {
   channelId   String        @unique
   user        User          @relation(fields: [userId], references: [clerkId])
   userId      String
-  connections Connections[]
+  connections Connection[]
 }
 
 model Slack {
@@ -64,7 +64,7 @@ model Slack {
   teamName         String
   User             User          @relation(fields: [userId], references: [clerkId])
   userId           String
-  connections      Connections[]
+  connections      Connection[]
 }
 
 model Notion {
@@ -76,10 +76,10 @@ model Notion {
   workspaceIcon String
   User          User          @relation(fields: [userId], references: [clerkId])
   userId        String
-  connections   Connections[]
+  connections   Connection[]
 }
 
-model Connections {
+model Connection {
   id               String          @id @default(cuid())
   type             String          @unique
   DiscordWebhook   DiscordWebhook? @relation(fields: [discordWebhookId], references: [id])
@@ -92,7 +92,7 @@ model Connections {
   slackId          String?
 }
 
-model Workflows {
+model Workflow {
   id                String   @id @default(cuid())
   nodes             String?
   edges             String?

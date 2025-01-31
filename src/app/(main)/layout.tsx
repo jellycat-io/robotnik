@@ -9,7 +9,7 @@ export default function MainLayout({
   return (
     <div className="flex overflow-hidden h-screen">
       <Sidebar />
-      <div className="w-full">
+      <div className="w-full dark:bg-black">
         <InfoBar />
         {children}
       </div>

@@ -17,6 +17,13 @@ export type UserServerData = Prisma.UserGetPayload<{
   }
 }>
 
+export const CreateWorkflowSchema = z.object({
+  name: z.string().min(1, "Required"),
+  description: z.string(),
+})
+
+export type CreateWorkflowValues = z.infer<typeof CreateWorkflowSchema>
+
 export type ConnectionTypes = "Google Drive" | "Notion" | "Slack" | "Discord"
 
 export type Connection = {

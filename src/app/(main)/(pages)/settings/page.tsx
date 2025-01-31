@@ -8,7 +8,7 @@ export default async function SettingsPage() {
 
   return (
     <div className="flex flex-col gap-4 relative">
-      <PageHeader>Settings</PageHeader>
+      <PageHeader title="Settings" />
       <div className="flex flex-col gap-10 p-6">
         <div>
           <h2 className="text-2xl font-bold">User Profile</h2>

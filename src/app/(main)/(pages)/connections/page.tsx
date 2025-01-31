@@ -14,7 +14,7 @@ export default function ConnectionsPage() {
 
   return (
     <div className="flex flex-col gap-4 relative">
-      <PageHeader>Connections</PageHeader>
+      <PageHeader title="Connections" />
       <section className="flex flex-col gap-6 px-6 py-2 text-muted-foreground">
         Connect all your apps directly from here. You may need to connect these
         apps regularly to refresh verification.
