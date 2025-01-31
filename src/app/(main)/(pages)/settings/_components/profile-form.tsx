@@ -1,13 +1,11 @@
 "use client"
 
-import { useState } from "react"
-
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SaveIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
 
-import { EditUserProfileSchema } from "@/lib/types"
+import { UpdateUserSchema, UserServerData, UserUpdateValues } from "@/lib/types"
+import { useToast } from "@/hooks/use-toast"
 import {
   Form,
   FormControl,
@@ -19,29 +17,55 @@ import {
 import { Input } from "@/components/ui/input"
 import { LoadingButton } from "@/components/loading-button"
 
-export function ProfileForm() {
-  const [loading, setLoading] = useState(false)
+import { updateUserInfo } from "../actions"
 
-  const form = useForm<z.infer<typeof EditUserProfileSchema>>({
-    resolver: zodResolver(EditUserProfileSchema),
+interface ProfileFormProps {
+  user: UserServerData
+}
+
+export function ProfileForm({ user }: ProfileFormProps) {
+  const { toast } = useToast()
+
+  const form = useForm<UserUpdateValues>({
+    resolver: zodResolver(UpdateUserSchema),
     defaultValues: {
-      name: "",
-      email: "",
+      name: user.name ?? "",
+      email: user.email ?? "",
     },
   })
 
+  async function handleSubmit(values: UserUpdateValues) {
+    try {
+      await updateUserInfo(values)
+    } catch (e) {
+      console.error(e)
+      toast({
+        variant: "destructive",
+        description: "Something went wrong...",
+      })
+    }
+  }
+
+  const isLoading = form.formState.isSubmitting
+
   return (
     <Form {...form}>
-      <form className="flex flex-col gap-6">
+      <form
+        className="flex flex-col gap-6"
+        onSubmit={form.handleSubmit(handleSubmit)}
+      >
         <FormField
           control={form.control}
           name="name"
-          disabled={loading}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Full name</FormLabel>
               <FormControl>
-                <Input placeholder="Fox Mulder" {...field} />
+                <Input
+                  placeholder="Fox Mulder"
+                  {...field}
+                  disabled={isLoading}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -50,7 +74,6 @@ export function ProfileForm() {
         <FormField
           control={form.control}
           name="email"
-          disabled
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email address</FormLabel>
@@ -58,6 +81,7 @@ export function ProfileForm() {
                 <Input
                   type="email"
                   placeholder="fox.mulder@fbi.gov"
+                  disabled
                   {...field}
                 />
               </FormControl>
@@ -67,11 +91,11 @@ export function ProfileForm() {
         />
         <LoadingButton
           type="submit"
-          loading={loading}
+          loading={isLoading}
           className="self-start"
           icon={SaveIcon}
         >
-          {loading ? "Saving..." : "Save"}
+          {isLoading ? "Saving..." : "Save"}
         </LoadingButton>
       </form>
     </Form>

@@ -6,6 +6,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { ClerkProvider } from "@clerk/nextjs"
 
+import { ToastProvider } from "@/components/ui/toast"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
 const font = DM_Sans({
@@ -35,7 +36,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <TooltipProvider>{children}</TooltipProvider>
+            <TooltipProvider>
+              {children}
+              <ToastProvider />
+            </TooltipProvider>
           </ThemeProvider>
         </body>
       </html>

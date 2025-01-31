@@ -1,8 +1,11 @@
+import { getCurrentUser } from "@/app/actions"
+
 import { PageHeader } from "../_components/page-header"
 import { ProfileForm } from "./_components/profile-form"
-import { ProfilePicture } from "./_components/profile-picture"
 
-export default function SettingsPage() {
+export default async function SettingsPage() {
+  const user = await getCurrentUser()
+
   return (
     <div className="flex flex-col gap-4 relative">
       <PageHeader>Settings</PageHeader>
@@ -13,8 +16,7 @@ export default function SettingsPage() {
             Add or update your information.
           </p>
         </div>
-        <ProfilePicture />
-        <ProfileForm />
+        <ProfileForm user={user} />
       </div>
     </div>
   )
